@@ -29,7 +29,7 @@ class App extends Component {
       list: list,
 
     };
-    
+
     this.onDismiss = this.onDismiss.bind(this);
   }
 
@@ -42,8 +42,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {
-          this.state.list.map(item =>
+        {this.state.list.map(item => {
+          const onHandleDismiss = () =>
+            this.onDismiss(item.objectID);
+
+          return (
             <div key={item.objectID}>
               <span>
                 <a href={item.url}>{item.title}</a>
@@ -53,15 +56,17 @@ class App extends Component {
               <span>{item.points}</span>
               <span>
                 <button
-                  onClick={() => this.onDismiss(item.objectID)}
+                  // onClick={() => this.onDismiss(item.objectID)}
+                  onClick={onHandleDismiss}
                   type="button"
                 >
-                Dismiss
+                  Dismiss
                 </button>
               </span>
             </div>
-          )
+          );
         }
+        )}
       </div>
     );
   }
